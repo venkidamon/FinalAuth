@@ -1,10 +1,10 @@
-name: Build and deploy .NET Core application to linux webapp Authorization20220518223409 with API Management Service Authorizationapiv1
+name: Build and deploy .NET Core application to windows webapp Authorization20220518230652 with API Management Service Authorizationapiv1
 on:
   push:
     branches:
     - master
 env:
-  AZURE_WEBAPP_NAME: Authorization20220518223409
+  AZURE_WEBAPP_NAME: Authorization20220518230652
   DOTNET_CORE_VERSION: 6.0.x
   WORKING_DIRECTORY: Authorization
   CONFIGURATION: Release
@@ -13,7 +13,7 @@ env:
   AZURE_APIM_RESOURCEGROUP: PensionManagementDocker
   AZURE_APIM_SERVICENAME: Authorizationapiv1
   AZURE_APIM_API_ID: Authorization
-  AZURE_APIM_APPSERVICEURL: https://authorization20220518223409.azurewebsites.net
+  AZURE_APIM_APPSERVICEURL: https://authorization20220518230652.azurewebsites.net
   SWASHBUCLE_ASPNET_CORE_CLI_PACKAGE_VERSION: 5.6.3
   SWASHBUCKLE_DOTNET_CORE_VERSION: 3.1.x
   API_IMPORT_SPECIFICATION_PATH: Authorization/publish/swagger.json
@@ -21,7 +21,7 @@ env:
   API_IMPORT_VERSION: v1
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -51,7 +51,7 @@ jobs:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     steps:
     - name: Download artifact from build job
@@ -64,7 +64,7 @@ jobs:
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-        publish-profile: ${{ secrets.Authorization20220518223409_47e4 }}
+        publish-profile: ${{ secrets.Authorization20220518230652_0f73 }}
     - name: Azure Login
       uses: azure/login@v1
       with:
